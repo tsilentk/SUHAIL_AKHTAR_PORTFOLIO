@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUHAIL AKHTAR | FOUNDER, SAKILA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+      :root {
+        --bg-deep: #f8fafc;
+        --bg-panel: rgba(255, 255, 255, 0.7);
+        --accent-cyan: #0284c7;
+        --accent-silver: #64748b;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --font-display: "Space Grotesk", sans-serif;
+        --font-body: "Outfit", sans-serif;
+        --font-orbitron: "Orbitron", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-deep);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        overflow-x: hidden;
+      }
+
+      .orbitron { font-family: var(--font-orbitron); }
+      .display-font { font-family: var(--font-display); }
+
+      /* Minimalist Scrollbar */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--bg-deep); }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+      ::selection {
+        background: var(--accent-cyan);
+        color: var(--bg-deep);
+      }
+      
+      /* Background Grids & Flows */
+      .neural-flow {
+        position: fixed;
+        inset: 0;
+        background-image: 
+          radial-gradient(circle at 50% 50%, rgba(2, 132, 199, 0.03) 0%, transparent 50%),
+          linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+        background-size: 100% 100%, 50px 50px, 50px 50px;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .obsidian-card {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.9));
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .obsidian-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(2, 132, 199, 0.3), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .obsidian-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        border-color: rgba(2, 132, 199, 0.2);
+        box-shadow: 0 20px 50px -10px rgba(2, 132, 199, 0.05);
+      }
+      
+      .obsidian-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .text-glow {
+        text-shadow: 0 0 10px rgba(2, 132, 199, 0.3), 0 0 20px rgba(2, 132, 199, 0.1);
+      }
+      
+      .cyan-gradient {
+        background: linear-gradient(135deg, #f8fafc 0%, #0284c7 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .modern-btn {
+        background: var(--text-primary);
+        color: var(--bg-deep);
+        padding: 0.75rem 2rem;
+        border-radius: 4px;
+        font-family: var(--font-orbitron);
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .modern-btn:hover {
+        background: var(--accent-cyan);
+        box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
+        transform: translateY(-2px);
+      }
+
+      /* Scanline & HUD Elements */
+      .scanline {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 4px;
+        background: linear-gradient(to bottom, transparent, rgba(2, 132, 199, 0.05), transparent);
+        pointer-events: none;
+        animation: scan 8s linear infinite;
+        z-index: 100;
+      }
+
+      @keyframes scan {
+        0% { transform: translateY(-100vh); }
+        100% { transform: translateY(100vh); }
+      }
+
+      .tech-border {
+        position: relative;
+      }
+      .tech-border::after {
+        content: '';
+        position: absolute;
+        bottom: -5px; right: -5px;
+        width: 20px; height: 20px;
+        border-right: 2px solid var(--accent-cyan);
+        border-bottom: 2px solid var(--accent-cyan);
+        opacity: 0.5;
+      }
+
+      .hud-metadata {
+        font-family: var(--font-orbitron);
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: var(--accent-cyan);
+        opacity: 0.6;
+      }
+      
+      .vertical-text {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+      }
+      
+      .clip-diagonal {
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+      
+      /* Custom Cursor */
+      .custom-cursor {
+        width: 30px;
+        height: 30px;
+        border: 2px solid var(--accent-cyan);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+        display: none;
+        mix-blend-mode: color-dodge;
+        box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+      }
+      
+      .cursor-dot {
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 8px white;
+      }
+
+      /* Noise Overlay */
+      .noise {
+        position: fixed;
+        inset: 0;
+        background: url('https://grainy-gradients.vercel.app/noise.svg');
+        opacity: 0.1;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: overlay;
+      }
+
+      /* Glitch Effect */
+      .glitch-hover:hover {
+        animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+        text-shadow: 2px 0 0 #0284c7, -2px 0 0 #e2e8f0;
+      }
+
+      @keyframes glitch-skew {
+        0% { transform: skew(0deg); }
+        20% { transform: skew(-5deg); }
+        40% { transform: skew(5deg); }
+        60% { transform: skew(-2deg); }
+        80% { transform: skew(2deg); }
+        100% { transform: skew(0deg); }
+      }
+
+      @media (min-width: 1024px) {
+        body { cursor: none !important; }
+        a, button, .obsidian-card { cursor: none !important; }
+      }
+    </style>
+
+  </head>
+  <body class="animated-bg text-slate-900">
+    <div class="noise"></div>
+    <div class="custom-cursor"><div class="cursor-dot"></div></div>
+    <div class="neural-flow"></div>
+    <div class="scanline"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-slate-900/5">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3">
+            <a href="index.html" class="text-xl font-bold display-font tracking-tight text-slate-900 group orbitron uppercase">
+              FOUNDER
+            </a>
+          </div>
+          <span class="hud-metadata ml-5 mt-1">ID: FOUNDER_01 // SECURE_ACCESS</span>
+        </div>
+        <div class="hidden md:flex gap-10 text-[10px] orbitron font-bold tracking-[0.2em] text-slate-900/60 items-center">
+          <a href="#vision" class="hover:text-accent-cyan transition-colors">01. VISION</a>
+          <a href="#about" class="hover:text-accent-cyan transition-colors">02. JOURNEY</a>
+          <a href="#sakila" class="hover:text-accent-cyan transition-colors">03. SYSTEMS</a>
+          <a href="#contact" class="modern-btn text-[10px] scale-90">
+            CONNECT_LINK
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="vision" class="min-h-screen flex items-center pt-32 pb-20 px-6 relative overflow-hidden">
+      <!-- Background HUD Elements -->
+      <div class="absolute top-[20%] left-[5%] orbitron text-[10rem] font-black text-slate-900/[0.02] select-none pointer-events-none">SYSTEM</div>
+      <div class="absolute bottom-[10%] right-[5%] orbitron text-[10rem] font-black text-slate-900/[0.02] select-none pointer-events-none">FOUNDER</div>
+      
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        
+        <!-- Left: Vision / Core Text -->
+        <div class="space-y-8" data-aos="fade-right">
+          <div class="inline-flex items-center gap-4 px-4 py-2 bg-slate-900/5 backdrop-blur-md border border-slate-900/10 tech-border">
+            <span class="hud-metadata">STATUS: <span class="text-accent-cyan">OPERATIONAL</span></span>
+            <div class="w-1 h-4 bg-slate-900/20"></div>
+            <span class="hud-metadata">REGION: GLOBAL</span>
+          </div>
+          
+          <h1 class="text-6xl md:text-7xl display-font font-bold leading-none tracking-tighter text-slate-900 glitch-hover">
+            ARCHITECT_ING <br/>
+            <span class="cyan-gradient text-glow">SENTIENCE.</span>
+          </h1>
+          
+          <p class="text-xl text-text-secondary leading-relaxed font-light max-w-lg border-l-2 border-accent-cyan/30 pl-6">
+            I engineer the bridge between human potential and artificial intelligence. Founder of SAKILA, shaping the next era of robotics and automation.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 pt-6">
+            <a href="#sakila" class="modern-btn group">
+              VIEW_SYSTEMS
+              <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="#contact" class="orbitron text-[10px] font-bold tracking-widest border border-slate-900/10 px-8 py-4 hover:bg-slate-900/5 transition-all text-slate-900/70">
+              ESTABLISH_UPLINK
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Portrait HUD -->
+        <div class="flex justify-center" data-aos="zoom-in" data-aos-delay="200">
+          <div class="relative group">
+            <!-- HUD Frame Elements -->
+            <div class="absolute -inset-4 border border-accent-cyan/20 pointer-events-none rounded-sm"></div>
+            <div class="absolute -top-6 -left-6 w-12 h-12 border-t-2 border-l-2 border-accent-cyan pointer-events-none"></div>
+            <div class="absolute -bottom-6 -right-6 w-12 h-12 border-b-2 border-right-2 border-accent-cyan pointer-events-none"></div>
+            
+            <!-- Metadata Flanks -->
+            <div class="absolute -right-20 top-1/4 hidden xl:block space-y-4">
+              <div class="hud-metadata vertical-text">AUTH_LVL: LEVEL_01</div>
+              <div class="hud-metadata vertical-text">SYNC_RATE: 98.4%</div>
+            </div>
+            
+            <div class="relative overflow-hidden obsidian-card rounded-none h-[500px] w-full max-w-[450px] filter grayscale transition-all duration-700 hover:grayscale-0">
+               <img src="./SAKILA FOUNDER ( SUHAIL AKHTAR ).jpg" alt="Suhail Akhtar - Founder" class="w-full h-full object-cover object-[center_15%] scale-110 group-hover:scale-100 transition-transform duration-1000">
+               
+               <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-xl p-4 border border-slate-900/10 shadow-2xl">
+                  <div class="display-font font-extrabold text-lg text-slate-900 tracking-widest">SUHAIL AKHTAR</div>
+                  <div class="hud-metadata mt-1">POSITION: FOUNDER & LEAD ARCHITECT</div>
+               </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- System Diagnostics -->
+    <section class="max-w-6xl mx-auto px-6 pb-20 relative z-10 hidden lg:block">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="400">
+        <div class="obsidian-card p-6 border-l-2 border-l-accent-cyan">
+          <div class="hud-metadata mb-4">SYSTEM_DIAGNOSTICS</div>
+          <div class="space-y-4">
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] orbitron font-bold">
+                <span>AI_INTEGRATION</span>
+                <span class="text-accent-cyan">94%</span>
+              </div>
+              <div class="h-1 bg-slate-900/5 rounded-full overflow-hidden">
+                <div class="h-full bg-accent-cyan w-[94%]" data-aos="slide-right" data-aos-delay="600"></div>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] orbitron font-bold">
+                <span>ROBOTIC_SYNC</span>
+                <span class="text-accent-cyan">88%</span>
+              </div>
+              <div class="h-1 bg-slate-900/5 rounded-full overflow-hidden">
+                <div class="h-full bg-accent-cyan w-[88%]" data-aos="slide-right" data-aos-delay="800"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="obsidian-card p-6 border-l-2 border-l-accent-cyan grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <div class="hud-metadata mb-2">NETWORK_LOAD</div>
+            <div class="space-y-3">
+              <div class="flex justify-between text-[9px] orbitron font-bold opacity-80">
+                <span>SYNC_RATE</span>
+                <span class="text-accent-cyan">98.4%</span>
+              </div>
+              <div class="flex justify-between text-[9px] orbitron font-bold opacity-80">
+                <span>LATENCY</span>
+                <span class="text-accent-cyan">4MS</span>
+              </div>
+              <div class="flex justify-between text-[9px] orbitron font-bold opacity-80">
+                <span>UPLINK</span>
+                <span class="text-accent-cyan">ACTIVE</span>
+              </div>
+            </div>
+            <div class="text-[8px] orbitron text-accent-cyan/60 animate-pulse mt-2">[ PROCESSING_STREAM... ]</div>
+          </div>
+          <div class="flex flex-col justify-center items-end border-l border-slate-900/5 pl-4">
+            <div class="flex items-end gap-1.5 h-16">
+              <div class="w-1.5 bg-accent-cyan/40 h-[20%] animate-pulse"></div>
+              <div class="w-1.5 bg-accent-cyan/40 h-[60%] animate-pulse" style="animation-delay: 0.2s"></div>
+              <div class="w-1.5 bg-accent-cyan/40 h-[40%] animate-pulse" style="animation-delay: 0.4s"></div>
+              <div class="w-1.5 bg-accent-cyan/40 h-[90%] animate-pulse" style="animation-delay: 0.6s"></div>
+              <div class="w-1.5 bg-accent-cyan/40 h-[55%] animate-pulse" style="animation-delay: 0.1s"></div>
+              <div class="w-1.5 bg-accent-cyan/40 h-[75%] animate-pulse" style="animation-delay: 0.3s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- About / Philosophy Section -->
+    <section id="about" class="py-32 bg-transparent relative">
+      <div class="max-w-6xl mx-auto px-6 text-center space-y-12 relative z-10">
+         <div class="flex flex-col items-center">
+           <h2 class="hud-metadata mb-4 tracking-[0.5em]" data-aos="fade-up">02. CORE_PHILOSOPHY</h2>
+           <div class="w-20 h-px bg-accent-cyan/30 mb-8"></div>
+         </div>
+         
+         <blockquote class="text-3xl md:text-5xl font-light text-slate-900 leading-tight display-font max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+           "Innovation isn't just about building faster machines. It's about building <span class="cyan-gradient font-bold text-glow">smarter</span> ones that understand the world they inhabit."
+         </blockquote>
+         
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-24">
+            <div class="obsidian-card p-10 group" data-aos="fade-up" data-aos-delay="150">
+              <div class="w-14 h-14 bg-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                <i data-lucide="brain-circuit" class="w-7 h-7 text-accent-cyan"></i>
+              </div>
+              <h3 class="display-font font-bold mb-4 text-xl text-slate-900 tracking-wide">DEEP_LEARNING</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Pioneering AI models that go beyond pattern recognition to true cognitive understanding.</p>
+              <div class="mt-6 hud-metadata opacity-40">MODULE_ID: 0x9A2</div>
+            </div>
+            
+            <div class="obsidian-card p-10 group" data-aos="fade-up" data-aos-delay="200">
+              <div class="w-14 h-14 bg-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                <i data-lucide="bot" class="w-7 h-7 text-accent-cyan"></i>
+              </div>
+              <h3 class="display-font font-bold mb-4 text-xl text-slate-900 tracking-wide">PHYSICAL_SYSTEMS</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Engineering robotics like VECTRON that embody calculated force and extreme precision.</p>
+              <div class="mt-6 hud-metadata opacity-40">MODULE_ID: 0x47B</div>
+            </div>
+            
+            <div class="obsidian-card p-10 group" data-aos="fade-up" data-aos-delay="250">
+              <div class="w-14 h-14 bg-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                <i data-lucide="globe" class="w-7 h-7 text-accent-cyan"></i>
+              </div>
+              <h3 class="display-font font-bold mb-4 text-xl text-slate-900 tracking-wide">GLOBAL_IMPACT</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">Creating solutions that solve real-world problems in education and high-stakes industry.</p>
+              <div class="mt-6 hud-metadata opacity-40">MODULE_ID: 0x11E</div>
+            </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- SAKILA Company Section -->
+    <section id="sakila" class="py-32 px-6 relative">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div data-aos="fade-right">
+           <div class="flex items-center gap-4 mb-6">
+             <div class="w-2 h-2 bg-accent-cyan rounded-full"></div>
+             <h2 class="hud-metadata tracking-[0.5em]">03. SYSTEM_REGISTRY</h2>
+           </div>
+           
+           <h2 class="text-5xl lg:text-7xl display-font font-bold mb-8 text-slate-900 tracking-tight">THE <span class="cyan-gradient">VENTURES.</span></h2>
+           <p class="text-lg text-text-secondary mb-12 leading-relaxed font-light">
+             My leadership is defined by the systems I architect. From intelligent document processing to autonomous combat robotics, these ventures represent the bleeding edge of my engineering capabilities.
+           </p>
+           
+           <div class="space-y-8">
+             <a href="https://www.linkedin.com/company/sakila/" target="_blank" class="modern-btn group">
+               ACCESS_CORPORATE_DATA
+               <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+             </a>
+           </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-left">
+           <!-- Vectron -->
+           <div class="obsidian-card p-10 aspect-square flex flex-col justify-between group">
+              <div class="flex justify-between items-start">
+                <i data-lucide="cpu" class="w-10 h-10 text-slate-900/20 group-hover:text-accent-cyan transition-colors duration-300"></i>
+                <span class="hud-metadata px-3 py-1 border border-slate-900/10 text-[8px]">PROTOTYPE_V1</span>
+              </div>
+              <div>
+                <div class="hud-metadata text-accent-cyan mb-2">ROBOTICS // DEFENSE</div>
+                <div class="font-bold display-font text-3xl text-slate-900">VECTRON</div>
+                <div class="mt-4 h-1 bg-slate-900/5 w-full rounded-full overflow-hidden">
+                  <div class="h-full bg-accent-cyan w-[65%] animate-pulse"></div>
+                </div>
+                <div class="hud-metadata mt-2 opacity-50">SYNC: 65%</div>
+              </div>
+           </div>
+           
+           <!-- ExamHack AI -->
+           <div class="obsidian-card p-10 aspect-square flex flex-col justify-between group">
+              <div class="flex justify-between items-start">
+                <i data-lucide="graduation-cap" class="w-10 h-10 text-slate-900/20 group-hover:text-accent-cyan transition-colors duration-300"></i>
+                <span class="hud-metadata px-3 py-1 border border-accent-cyan/20 text-[8px] text-accent-cyan">ACTIVE_SYSTEM</span>
+              </div>
+              <div>
+                <div class="hud-metadata text-accent-cyan mb-2">ED_TECH // AI</div>
+                <div class="font-bold display-font text-3xl text-slate-900">EXAMHACK AI</div>
+                <div class="mt-4 h-1 bg-accent-cyan/20 w-full rounded-full overflow-hidden">
+                  <div class="h-full bg-accent-cyan w-full"></div>
+                </div>
+                <div class="hud-metadata mt-2 opacity-50">DEPLOYMENT: COMPLETE</div>
+              </div>
+           </div>
+           
+           <!-- Slide Deck AI -->
+           <div class="obsidian-card p-10 aspect-square flex flex-col justify-between group">
+              <div class="flex justify-between items-start">
+                <i data-lucide="presentation" class="w-10 h-10 text-slate-900/20 group-hover:text-accent-cyan transition-colors duration-300"></i>
+                <span class="hud-metadata px-3 py-1 border border-slate-900/10 text-[8px]">BETA_TEST</span>
+              </div>
+              <div>
+                <div class="hud-metadata text-accent-cyan mb-2">GENERATIVE // PRESENTATION</div>
+                <div class="font-bold display-font text-3xl text-slate-900">SLIDE DECK AI</div>
+                <div class="mt-4 h-1 bg-slate-900/5 w-full rounded-full overflow-hidden">
+                  <div class="h-full bg-accent-cyan w-[82%]"></div>
+                </div>
+                <div class="hud-metadata mt-2 opacity-50">SYNC: 82%</div>
+              </div>
+           </div>
+           
+           <!-- Sakila Link -->
+           <a href="https://www.instagram.com/sakila.in?igsh=MTEzYWl6NTMxamVhMA==" target="_blank" class="obsidian-card p-10 aspect-square flex flex-col justify-center items-center group text-center hover:bg-slate-900/5 transition-all">
+              <i data-lucide="instagram" class="w-12 h-12 mb-6 group-hover:scale-110 transition-transform duration-500 text-slate-900/20 group-hover:text-slate-900"></i>
+              <span class="display-font font-bold text-2xl text-slate-900 tracking-widest">SAKILA.IN</span>
+              <span class="hud-metadata mt-2">SOCIAL_UPLINK</span>
+           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 bg-transparent relative">
+      <div class="max-w-screen-xl mx-auto px-6 text-center">
+        <div class="mb-20">
+          <div class="inline-flex items-center justify-center p-4 bg-accent-cyan/5 border border-accent-cyan/20 tech-border mb-8">
+            <i data-lucide="mail" class="w-6 h-6 text-accent-cyan text-glow"></i>
+          </div>
+          <h2 class="text-5xl lg:text-7xl display-font font-bold mb-6 tracking-tight text-slate-900">INITIATE_UPLINK.</h2>
+          <p class="text-text-secondary font-light max-w-lg mx-auto text-lg border-b border-slate-900/5 pb-8">Connecting vision with execution. Reach out to discuss the future of automation.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-center gap-8 items-center flex-wrap mb-24 px-6">
+          <a href="mailto:suhail.akhtar@sakila.in" class="modern-btn scale-110 !px-12 !py-6 group">
+            <div class="flex flex-col items-start translate-y-1">
+              <span class="hud-metadata text-[8px] opacity-60 group-hover:text-bg-deep transition-colors">FOUNDER_DIRECT</span>
+              <span>suhail.akhtar@sakila.in</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 ml-4"></i>
+          </a>
+          <a href="mailto:info@sakila.in" class="orbitron text-[10px] font-bold tracking-[3px] text-slate-900/50 border border-slate-900/10 px-10 py-6 hover:bg-slate-900/5 transition-all">
+            GENERAL_INQUIRY // info@sakila.in
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <!-- Founder Identity -->
+          <a href="https://www.instagram.com/tsilentk?igsh=cnZkazR3eTM3MHgy" target="_blank" class="obsidian-card p-8 flex flex-col items-center gap-4 group">
+             <div class="w-12 h-12 rounded-none bg-slate-900/5 flex items-center justify-center group-hover:bg-accent-cyan/10 transition-colors border border-slate-900/5">
+               <i data-lucide="instagram" class="w-5 h-5 text-slate-900/40 group-hover:text-accent-cyan transition-colors"></i>
+             </div>
+             <div class="text-center">
+               <div class="font-bold display-font text-sm text-slate-900 tracking-widest">SUHAIL AKHTAR</div>
+               <div class="hud-metadata mt-1 opacity-40">FOUNDER_ID</div>
+             </div>
+          </a>
+
+          <!-- Sakila Insta -->
+          <a href="https://www.instagram.com/sakila.in?igsh=MTEzYWl6NTMxamVhMA==" target="_blank" class="obsidian-card p-8 flex flex-col items-center gap-4 group">
+             <div class="w-12 h-12 rounded-none bg-slate-900/5 flex items-center justify-center group-hover:bg-accent-cyan/10 transition-colors border border-slate-900/5">
+               <i data-lucide="instagram" class="w-5 h-5 text-slate-900/40 group-hover:text-accent-cyan transition-colors"></i>
+             </div>
+             <div class="text-center">
+               <div class="font-bold display-font text-sm text-slate-900 tracking-widest">@sakila.in</div>
+               <div class="hud-metadata mt-1 opacity-40">SYSTEM_ENTITY</div>
+             </div>
+          </a>
+
+          <!-- Founder LinkedIn -->
+          <a href="https://www.linkedin.com/in/suhail-akhtar-75895a266/" target="_blank" class="obsidian-card p-8 flex flex-col items-center gap-4 group">
+             <div class="w-12 h-12 rounded-none bg-slate-900/5 flex items-center justify-center group-hover:bg-accent-cyan/10 transition-colors border border-slate-900/5">
+               <i data-lucide="linkedin" class="w-5 h-5 text-slate-900/40 group-hover:text-accent-cyan transition-colors"></i>
+             </div>
+             <div class="text-center">
+               <div class="font-bold display-font text-sm text-slate-900 tracking-widest">PROFESSIONAL_NODE</div>
+               <div class="hud-metadata mt-1 opacity-40">LINKEDIN_SYNC</div>
+             </div>
+          </a>
+
+           <!-- Sakila LinkedIn -->
+          <a href="https://www.linkedin.com/company/sakila/" target="_blank" class="obsidian-card p-8 flex flex-col items-center gap-4 group">
+             <div class="w-12 h-12 rounded-none bg-slate-900/5 flex items-center justify-center group-hover:bg-accent-cyan/10 transition-colors border border-slate-900/5">
+               <i data-lucide="building-2" class="w-5 h-5 text-slate-900/40 group-hover:text-accent-cyan transition-colors"></i>
+             </div>
+             <div class="text-center">
+               <div class="font-bold display-font text-sm text-slate-900 tracking-widest">SAKILA</div>
+               <div class="hud-metadata mt-1 opacity-40">CORPORATE_HOST</div>
+             </div>
+          </a>
+        </div>
+        
+        <div class="mt-32 pt-12 border-t border-slate-900/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-bold orbitron text-slate-900/30 tracking-[0.4em] gap-8">
+          <span>&copy; 2025 SUHAIL AKHTAR. // SYSTEM_STATUS: ENCRYPTED.</span>
+          <div class="flex gap-8">
+             <a href="mailto:info@sakila.in" class="hover:text-accent-cyan transition-colors">EMAIL</a>
+             <a href="https://wa.me/916388805882" class="hover:text-accent-cyan transition-colors">WHATSAPP_UPLINK</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      lucide.createIcons();
+      AOS.init({
+        once: true,
+        duration: 1000,
+        offset: 50,
+      });
+
+      // Custom Cursor Logic
+      const cursor = document.querySelector('.custom-cursor');
+      const cursorDot = document.querySelector('.cursor-dot');
+      
+      if (window.innerWidth >= 1024) {
+        cursor.style.display = 'block';
+        
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+
+        const interactiveElements = document.querySelectorAll('a, button, .obsidian-card');
+        interactiveElements.forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursor.style.width = '60px';
+            cursor.style.height = '60px';
+            cursor.style.backgroundColor = 'rgba(2, 132, 199, 0.1)';
+            cursor.style.borderColor = 'white';
+          });
+          el.addEventListener('mouseleave', () => {
+            cursor.style.width = '30px';
+            cursor.style.height = '30px';
+            cursor.style.backgroundColor = 'transparent';
+            cursor.style.borderColor = 'var(--accent-cyan)';
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
